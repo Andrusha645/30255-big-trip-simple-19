@@ -10,19 +10,22 @@ export default class BoardPresenter {
   boardComponent = new BoardView();
   EventListComponent = new EventListView();
 
-  constructor({boardContainer}) {
+  constructor({boardContainer, eventsModel}) {
     this.boardContainer = boardContainer;
+    this.eventsModel = eventsModel;
   }
 
   init() {
+    this.boardEvents = [...this.eventsModel.getEvents()];
+
     render(this.boardComponent, this.boardContainer);
     render(new SortView(), this.boardComponent.getElement());
     render(this.EventListComponent, this.boardComponent.getElement());
     render(new EventEditView(), this.EventListComponent.getElement());
     render(new EventAddView(), this.EventListComponent.getElement());
 
-    for (let i = 0; i < 3; i++) {
-      render(new EventView(), this.EventListComponent.getElement());
+    for (let i = 0; i < this.boardEvents.length; i++) {
+      render(new EventView({event: this.boardEvents[i]}), this.EventListComponent.getElement());
     }
   }
 }
