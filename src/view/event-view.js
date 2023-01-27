@@ -4,7 +4,7 @@ import {humanizeTaskDueDate} from '../utils.js';
 function createEventTemplate(event) {
   const {dueDate} = event;
 
-  const date = humanizeTaskDueDate(dueDate);
+ //const date = humanizeTaskDueDate(dueDate);
   return (
     `<div class="event">
     <time class="event__date" datetime="2019-03-18">MAR 18</time>
