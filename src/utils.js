@@ -1,5 +1,6 @@
-//import dayjs from 'dayjs';
-const DATE_FORMAT = 'DD/MM/YYYY HH:mm';
+import dayjs from 'dayjs';
+const DATE_FORMAT = 'MMM D';
+const TIME_FORMAT = 'HH:mm';
 
 
 function getRandomArrayElement(items) {
@@ -15,9 +16,22 @@ const getRandomPositiveInteger = (a,b) => {
   return Math.floor(result);
 };
 
-function humanizeTaskDueDate(dueDate) {
+function humanizeEventDueDate(dueDate) {
   return dueDate ? dayjs(dueDate).format(DATE_FORMAT) : '';
 }
 
-export {getRandomArrayElement, getRandomPositiveInteger, humanizeTaskDueDate};
+function humanizeEventTimeFrom(timeFrom) {
+  return timeFrom ? dayjs(timeFrom).format(TIME_FORMAT) : '';
+}
+function humanizeEventTimeTo(timeTo) {
+  return timeTo ? dayjs(timeTo).format(TIME_FORMAT) : '';
+}
+
+export {
+  getRandomArrayElement,
+  getRandomPositiveInteger,
+  humanizeEventDueDate,
+  humanizeEventTimeFrom,
+  humanizeEventTimeTo
+};
 

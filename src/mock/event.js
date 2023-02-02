@@ -1,5 +1,5 @@
 import {getRandomArrayElement, getRandomPositiveInteger} from '../utils.js';
-
+import {TYPES} from '../const.js';
 const points = [
   {
     id: 1,
@@ -44,9 +44,9 @@ const offers = [
     type: 'drive',
     offers: [
       {
-        'id': 1,
-        'title': 'Rent a car',
-        'price': 200
+        id: 1,
+        title: 'Rent a car',
+        price: 200
       }
     ]
   },
@@ -54,9 +54,9 @@ const offers = [
     type: 'check-in',
     offers: [
       {
-        'id': 1,
-        'title': 'Add breakfast',
-        'price': 50
+        id: 1,
+        title: 'Add breakfast',
+        price: 50
       },
     ]
   },
@@ -64,14 +64,14 @@ const offers = [
     type: 'sightseeing',
     offers: [
       {
-        'id': 1,
-        'title': 'Book tickets',
-        'price': 40
+        id: 1,
+        title: 'Book tickets',
+        price: 40
       },
       {
-        'id': 2,
-        'title': 'Lunch in city',
-        'price': 30
+        id: 2,
+        title: 'Lunch in city',
+        price: 30
       }
     ]
   },
@@ -79,29 +79,29 @@ const offers = [
     type: 'flight',
     offers: [
       {
-        'id': 1,
-        'title': 'Add luggage',
-        'price': 50
+        id: 1,
+        title: 'Add luggage',
+        price: 50
       },
       {
-        'id': 2,
-        'title': 'Switch to comfort',
-        'price': 80
+        id: 2,
+        title: 'Switch to comfort',
+        price: 80
       },
       {
-        'id': 3,
-        'title': 'Add meal',
-        'price': 15
+        id: 3,
+        title: 'Add meal',
+        price: 15
       },
       {
-        'id': 4,
-        'title': 'Choose seats',
-        'price': 5
+        id: 4,
+        title: 'Choose seats',
+        price: 5
       },
       {
-        'id': 5,
-        'title': 'Travel by train',
-        'price': 40
+        id: 5,
+        title: 'Travel by train',
+        price: 40
       },
 
     ]
@@ -112,25 +112,41 @@ const offers = [
 ];
 const mockEvents = [
   {
-    date: 'Mar19',
-    type: 'taxi',
+    dueDate: 'Mar19',
+    type: getRandomArrayElement(TYPES),
     cityName: 'Amsterdam',
     dateFrom: '2019-07-10T22:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
     basePrice: 80,
-    offers: ''
+    checkedOffers() {
+      let typeOffer = 0;
+      const findType = 'flight';
+      for (let i = 0; i < offers.length; i++){
+        if (offers[i].type === findType) {
+          typeOffer = offers[i].offers;
+        }
+      }
+      return typeOffer[getRandomPositiveInteger(1,typeOffer.length - 1)];
+    },
   },
   {
-    date: 'Mar18',
-    type: 'check-in',
+    dueDate: 'Mar18',
+    type: getRandomArrayElement(TYPES),
     cityName: 'Geneva',
     dateFrom: '2019-06-10T22:55:56.845Z',
     dateTo: '2019-06-11T11:22:13.375Z',
     basePrice: 1100,
-    offers: ''
+    checkedOffers() {
+      let typeOffer = 0;
+      const findType = 'taxi';
+      for (let i = 0; i < offers.length; i++){
+        if (offers[i].type === findType) {
+          typeOffer = offers[i].offers;
+        }
+      }
+      return typeOffer[getRandomPositiveInteger(1,typeOffer.length - 1)];
+    }
   },
-
-
 ];
 
 function getRandomEvent() {
